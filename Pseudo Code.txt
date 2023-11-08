@@ -1,0 +1,124 @@
+Import StaffJobManagement
+Import StaffWorkloadView
+import PreferenceManagement
+import StaffAvailabilityManagement
+
+Class StaffInterface {
+method viewWeeklyAssignments() {
+		// …
+	}
+
+	method viewMonthlyWorkload () {
+		// …
+	}
+
+	method ViewJob () {
+		// …
+	}
+
+	method getAvailabilityOptions () {
+		// …
+	}
+
+	method getAvailabilityPage () {
+		// …
+	}
+
+	method getLateAvailabilityPage () {
+		// …
+	}
+	
+	public method indicateAvailability (String date, int shift, String reason, boolean late) {
+		if (timeWindow(date) && date == null && shift == null && late == null) {
+			  return error;
+		}
+
+		Availability availability = new Availability();
+		
+		if (late) {
+			if (!reason) {
+				return error;
+			}
+
+			availability.setLate(true);
+			availability.setReason(reason);
+		}
+
+		availability.setDate(date);
+		availability.setShift(shift);
+		
+		int success = saveAvailabilityToDatabase(availability);
+
+		return success;
+	}
+	public method indicateLateAvailability(String reason) {
+		// …
+	}
+
+	public method indicatePreference() {
+		// …
+	}
+}
+
+
+
+
+
+
+
+
+
+PSEUDO CODE FOR System_Variables
+
+TEMP Pseudo Code for System_Variables
+
+Class System_Variables {
+private static field instance: System_Variables
+	private static int ShiftTimingStart
+	private static int ShiftTimingEnd
+	private static String AvailabilityDeadline
+	private static int WeeksAhead
+
+	private System_Variables () {
+		// Constructor for System Variables, gets data from database
+	}
+
+	public getInstance () {
+		if (System_Variables.instance == null) {
+			System_Variables.instance = new System_Variables()
+		}
+		return System_Variables.instance
+	}
+
+	public method getShiftTimingStart () {	
+		return ShiftTimingStart
+	}
+		
+	public method setShiftTimingStart (int start_time) {
+		ShiftTimingStart = start_time
+	}
+
+	public method getShiftTImingEnd () {
+		return ShiftTimingEnd
+	}
+
+	public method setShiftTimingEnd (int end_time) {
+		ShiftTimingEnd = end_time
+	}
+
+	public method getAvailabilityDeadline () {
+		return AvailabilityDeadline
+	}
+
+	public method setAvailabilityDeadline (String availability_deadline) {
+		AvailabilityDeadline = availability_deadline
+	}
+
+	public method getWeeksAhead () {
+		return WeeksAhead
+	}
+
+	public method setWeeksAhead (int weeks_ahead) {
+		WeeksAhead = weeks_ahead
+	}
+}
